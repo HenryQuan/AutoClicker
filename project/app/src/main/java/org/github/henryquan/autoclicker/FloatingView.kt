@@ -94,10 +94,10 @@ class FloatingView : Service(), View.OnClickListener {
             R.id.start -> {
                 // Log.d("START","THIS IS STARTED");
                 val location = IntArray(2)
-                myFloatingView!!.getLocationOnScreen(location)
+
                 intent.putExtra("action", "play")
-                intent.putExtra("x", location[0] - 1)
-                intent.putExtra("y", location[1] - 1)
+                intent.putExtra("x", 100)
+                intent.putExtra("y", 200)
             }
             R.id.stop -> {
                 intent.putExtra("action", "stop")

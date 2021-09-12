@@ -48,15 +48,18 @@ class AutoService : AccessibilityService() {
     private fun playTap(x: Int, y: Int) {
         // Log.d("TAPPED","STARTED TAPpING");
         val swipePath = Path()
-        swipePath.moveTo(x.toFloat(), y.toFloat())
-        swipePath.lineTo(x.toFloat(), y.toFloat())
+        val x = x.toFloat()
+        val y = y.toFloat()
+        swipePath.moveTo(x, y)
+        swipePath.lineTo(x + 100, y + 100)
         val gestureBuilder = GestureDescription.Builder()
         gestureBuilder.addStroke(
-            StrokeDescription(swipePath, 0, 10)
+            StrokeDescription(swipePath, 20, 1000)
         )
+        val description = gestureBuilder.build()
         // dispatchGesture(gestureBuilder.build(), null, null);
-        // Log.d("hello","hello?");
-        dispatchGesture(gestureBuilder.build(), object : GestureResultCallback() {
+        Log.d("hello", "hello?")
+        dispatchGesture(description, object : GestureResultCallback() {
             override fun onCompleted(gestureDescription: GestureDescription) {
                 Log.d("Gesture Completed", "Gesture Completed")
                 super.onCompleted(gestureDescription)
@@ -65,7 +68,7 @@ class AutoService : AccessibilityService() {
             }
 
             override fun onCancelled(gestureDescription: GestureDescription) {
-                // Log.d("Gesture Cancelled","Gesture Cancelled");
+                Log.d("Gesture Cancelled", "Gesture Cancelled");
                 super.onCancelled(gestureDescription)
             }
         }, null)
@@ -74,6 +77,7 @@ class AutoService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {}
     override fun onInterrupt() {}
+
     private inner class IntervalRunnable : Runnable {
         override fun run() {
             Log.d("clicked", "click")
